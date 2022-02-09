@@ -40,7 +40,7 @@ export default function SignUp() {
         await updateProfile(auth.currentUser, {
           displayName: userName
         })
-  
+
         await addDoc(collection(db, "users"),{
           userId: user.uid,
           username: userName,
