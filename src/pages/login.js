@@ -25,8 +25,7 @@ export default function Login() {
 
     try {
         const auth = getAuth();
-        const userCredential = await signInWithEmailAndPassword(auth, emailAddress, password)
-        const user = userCredential.user
+        await signInWithEmailAndPassword(auth, emailAddress, password)
         navigate(ROUTES.DASHBOARD)
 
     } catch (error){
@@ -49,7 +48,7 @@ export default function Login() {
               
               {error && <p className="mb-4 text-xs text-red-500">{error}</p>}
 
-              <form>
+              <form onSubmit={handleLogin} method="POST">
                   <input
                       aria-label="Enter your email address"
                       className="text-sm w-full mr-3 py-5 px-4 h-2 border rounded mb-2"

@@ -78,7 +78,7 @@ export default function SignUp() {
               
               {error && <p className="mb-4 text-xs text-red-500">{error}</p>}
 
-              <form>
+              <form onSubmit={handleSignup} method="POST">
                   <input
                       aria-label="Enter your name"
                       className="text-sm w-full mr-3 py-5 px-4 h-2 border rounded mb-2"
