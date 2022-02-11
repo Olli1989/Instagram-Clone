@@ -1,4 +1,5 @@
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, limit, doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+
 
 import { db } from "../lib/firebase"
 
@@ -49,5 +50,32 @@ export async function getUserFollowedPhotos(userId, followingUserIds) {
 
 }
 
+export async function getSuggestedProfiles(userId) {
+  const userRef = query(collection(db, "users"))
+  const result = await getDocs(userRef, limit(10))
+
+  const [{ following }] = await getUserByUserId(userId);
+        
+  return result.docs
+      .map((user) => ({ ...user.data(), docId: user.id }))
+      .filter((profile) => profile.userId !== userId && !following.includes(profile.userId));
+
+}
+
+export async function updateUserFollowing(docId, profileId, isFollowingProfile) {
+  const followingRef = doc(db, "users", docId);
+
+  await updateDoc(followingRef, {
+    following: isFollowingProfile ? arrayRemove(profileId) : arrayUnion(profileId)
+  });     
+}
+
+export async function updateFollowedUserFollowers(docId, followingUserId, isFollowingProfile) {
+  const followedRef = doc(db, "users", docId);
+  
+  await updateDoc(followedRef, {
+    following: isFollowingProfile ? arrayRemove(followingUserId) : arrayUnion(followingUserId)
+  }); 
+}
 
 
