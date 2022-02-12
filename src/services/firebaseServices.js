@@ -1,7 +1,18 @@
 import { collection, query, where, getDocs, limit, doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
-
 import { db } from "../lib/firebase"
+
+export async function isUserFollowingProfile(activeUsername, profileUserId) {
+  const result = await getDocs(query(collection(db, "users"), where("username","==",activeUsername), where("following","array-contains",profileUserId)))
+      
+  const [response = {}] = result.docs.map((item) => ({
+      ...item.data(),
+      docId: item.id
+  }));
+  console.log(!!response.fullName)
+  
+  return !!response.fullName;
+}
 
 export async function doesUsernameExist(username) {
 
@@ -74,8 +85,51 @@ export async function updateFollowedUserFollowers(docId, followingUserId, isFoll
   const followedRef = doc(db, "users", docId);
   
   await updateDoc(followedRef, {
-    following: isFollowingProfile ? arrayRemove(followingUserId) : arrayUnion(followingUserId)
+    followers: isFollowingProfile ? arrayRemove(followingUserId) : arrayUnion(followingUserId)
   }); 
 }
 
+export async function getUserByUsername(username) {
+  const result = await getDocs(query(collection(db, "users"), where("username","==",username)))
+
+  const user = result.docs.map((item) => ({
+    ...item.data(),
+    docId: item.id
+  }));
+
+  return user.length > 0 ? user : false; 
+}
+
+export async function getUserIdByUsername(username) {
+  const result = await getDocs(query(collection(db, "users"), where("username","==",username)))
+  
+  const [{ userId = null }] = result.docs.map((item) => ({
+      ...item.data(),
+  }));
+
+  return userId
+}
+
+export async function getUserPhotosByUsername(username){
+  const userId = await getUserIdByUsername(username);
+  const result = await getDocs(query(collection(db, "photos"), where("userId","==",userId)))
+
+  const photos = result.docs.map((item) => ({
+    ...item.data(),
+    docId: item.id
+  }));
+
+  return photos
+}
+
+export async function toggleFollow(
+  isFollowingProfile,
+  activeUserDocId,
+  profileDocId,
+  profileId,
+  followingUserId
+) {
+  await updateUserFollowing(activeUserDocId, profileId, isFollowingProfile);
+  await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
+}
 

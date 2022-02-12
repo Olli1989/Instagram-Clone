@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Header from '../components/header';
 
 export default function NotFound() {
 
@@ -7,10 +8,11 @@ export default function NotFound() {
     },[])
 
     return (
-        <div className="bg-gray-200">
+        <div className="bg-gray">
+            <Header />
             <div className="mx-auto max-w-screen-lg">
                 <p className="text-center text-2xl">Not Found!</p>
             </div>
-        </div>   
+        </div>
     )
 }
