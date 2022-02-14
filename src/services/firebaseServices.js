@@ -9,7 +9,6 @@ export async function isUserFollowingProfile(activeUsername, profileUserId) {
       ...item.data(),
       docId: item.id
   }));
-  console.log(!!response.fullName)
   
   return !!response.fullName;
 }
@@ -18,11 +17,7 @@ export async function doesUsernameExist(username) {
 
   const result = await getDocs(query(collection(db, "users"), where("username","==",username)))
   
-  if(result.empty){
-    return false
-  }
-    
-  return true
+  return result.docs.map((user) => user.data().length > 0);
   
 }
 

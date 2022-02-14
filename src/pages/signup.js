@@ -31,7 +31,7 @@ export default function SignUp() {
 
     const usernameExist = await doesUsernameExist(userName)
 
-    if(!usernameExist){
+    if(usernameExist && usernameExist.length === 0){
       try {
         const auth = getAuth();
         const userCredential = await createUserWithEmailAndPassword(auth, emailAddress, password)
@@ -50,8 +50,8 @@ export default function SignUp() {
           followers: [],
           dateCreated: Date.now()
         })
-
-        navigate(ROUTES.DASHBOARD)
+        
+        navigate(ROUTES.LOGIN)
           
       } catch (error){
         setFullName('')

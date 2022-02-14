@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getAuth, signOut } from "firebase/auth";
 
 import * as ROUTES from '../constants/routes';
@@ -10,11 +10,13 @@ import instagramLogo from '../images/logo.png'
 
 export default function Header() {
     const {user} = useContext(UserContext)
+    let navigate = useNavigate()
 
     async function logOut (){
         const auth = getAuth();
         try {
             signOut(auth)
+            navigate(ROUTES.LOGIN)
         } catch (err) {
             console.error(err);
         }
