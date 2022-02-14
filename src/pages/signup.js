@@ -43,9 +43,9 @@ export default function SignUp() {
 
         await addDoc(collection(db, "users"),{
           userId: user.uid,
-          username: userName,
+          username: userName.toLowerCase(),
           fullName: fullName,
-          emailAddress: emailAddress,
+          emailAddress: emailAddress.toLowerCase(),
           following: [],
           followers: [],
           dateCreated: Date.now()
