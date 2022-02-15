@@ -20,12 +20,13 @@ export default function Profile({ username }) {
         async function getProfileInfoAndPhotos() {
             const [{ ...user }] = await getUserByUsername(username);
             const photos = await getUserPhotosByUsername(username);
+            console.log(user)
             
             dispatch({ profile: user, photosCollection: photos, followerCount: user.followers.length });
         }
         getProfileInfoAndPhotos();
     }, [username]);
-    
+ 
     return (
         <>
             <Header 
@@ -35,7 +36,7 @@ export default function Profile({ username }) {
                 setFollowerCount={dispatch}
                 username={username}
             />
-            <Photos photos={photosCollection} />
+            <Photos photos={photosCollection} username={username} />
         </>
     )
 }

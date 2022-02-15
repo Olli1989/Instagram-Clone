@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Header({ username }) {
+    console.log(username)
     return (
         <div className="flex border-b h-4 p-4 py-8">
             <div className="flex items-center">        
@@ -10,7 +11,7 @@ export default function Header({ username }) {
                     <img
                         className="rounded-full h-8 w-8 flex mr-3"
                         src={`images/avatars/${username}.jpg`}
-                        alt={`${username} profile picture`}
+                        alt={`${username} profile`}
                     />
                     <p className="font-bold">{username}</p>
                 </Link>
