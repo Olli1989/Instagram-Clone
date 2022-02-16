@@ -24,16 +24,16 @@ Dashboard:
 ![](public/images/Screenshot1.png)
 
 Profile Page:
-![](./images/Screenshot2.png)
+![](public//images/Screenshot2.png)
 
 Profile Modal:
-![](./images/Screenshot3.png)
+![](public//images/Screenshot3.png)
 
 LogIn Page:
-![](./images/Screenshot4.png)
+![](public//images/Screenshot4.png)
 
 SignUp Page
-![](./images/Screenshot5.png)
+![](public//images/Screenshot5.png)
 
 ## My process
 
