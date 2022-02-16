@@ -32,7 +32,7 @@ Profile Modal:
 LogIn Page:
 ![](public//images/Screenshot4.png)
 
-SignUp Page
+SignUp Page:
 ![](public//images/Screenshot5.png)
 
 ## My process
