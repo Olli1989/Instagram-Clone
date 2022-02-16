@@ -21,7 +21,7 @@ Including LogIn, SignUp, Pages like Dashboard, Profile, etc. and a Profile Modal
 ### Screenshot
 
 Dashboard:
-![](./images/Screenshot1.png)
+![](public/images/Screenshot1.png)
 
 Profile Page:
 ![](./images/Screenshot2.png)
