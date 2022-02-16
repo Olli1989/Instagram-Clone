@@ -12,7 +12,7 @@ export default function ProfileImageModal({open, onClose, content, username}) {
 
   const handleFocus = () => commentInput.current.focus();
 
-  //<Image className="object-scale-down" src={content.imageSrc} caption={content.caption} />
+
 
   return (
     open ?
